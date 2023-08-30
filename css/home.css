@@ -169,7 +169,7 @@ button[type="submit"]:hover {
 }
 
 .text7{
-    color: #4f4f48;
+    color: #3f3f39;
     font-size: 20px;
     font-weight: 550;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -187,7 +187,7 @@ button[type="submit"]:hover {
  }
 
  .text8{
-    color: #4f4f48;
+    color: #3f3f39;
     font-size: 18px;
     font-weight: 500;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -197,21 +197,21 @@ button[type="submit"]:hover {
     padding-right: 220px;
  }
 
- .faq-question {
-    background-color: #4f4f48;
-    color: #fff;
+ #question{
     cursor: pointer;
     padding: 20px;
-    font-size: 21px;
-    font-family: montserrat;
+    font-size: 19px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 500;
+    background-color: #3f3f39;
+    color: white;
   }
 
-  .faq-answer {
-    padding: 20px;
-    background-color: #4f4f48;
-    color: #fff;
+  #answer {
+    padding: 30px;
+    background-color: #6e6e66;
+    color: white;
     font-size:16px;
-    font-family: montserrat;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: justify
   }
