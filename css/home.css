@@ -158,9 +158,8 @@ button[type="submit"]:hover {
     width: 700px;
 }
 .img4{
-    width: 50px;
-    height: 50px;
-    color: white;
+    width: 40px;
+    height: 40px;
  }
 
  .heading3{
@@ -172,10 +171,17 @@ button[type="submit"]:hover {
 .text7{
     color: #4f4f48;
     font-size: 20px;
+    font-weight: 550;
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: left;
+    padding-top: 3px;
 }
 
 .padTop{
     padding-top: 80px;
 }
+
+.img5{
+    width: 35px;
+    height: 35px;
+ }
