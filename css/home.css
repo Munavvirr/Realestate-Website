@@ -73,8 +73,8 @@
     color: #ffffff;
 }
 .img1{
-   width: 100px;
-   height: 70px;
+   width: 50px;
+   height: 50px;
 }
 .text5{
     color: #ffffffa7;
@@ -223,6 +223,6 @@ button[type="submit"]:hover {
   }
 
   .img6{
-    width: 100px;
-    height: 80px;
+    width: 80px;
+    height: 50px;
  }
