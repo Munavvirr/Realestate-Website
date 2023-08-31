@@ -184,7 +184,7 @@ button[type="submit"]:hover {
 }
 
 .padTop{
-    padding-top: 80px;
+    padding-top: 40px;
 }
 
 .img5{
@@ -282,5 +282,63 @@ button[type="submit"]:hover {
 #answer{
     text-align: left;
 }
+#question{
+    font-size: 17px;
+}
+ }
 
+ @media (max-width: 1200px){
+    .text1{
+    font-size: 35px;
+    padding-top: 10px;
+    text-align: center;
+    }
+    .text2{
+        font-size: 19px;
+        text-align: center;
+        padding-top: 15px;
+        padding-right: 0px;
+    }
+    .text3{
+        padding-top: 21px;
+    }
+    .text4{
+        font-size: 19px;
+    }
+    .text5{
+        font-size: 18px;
+        text-align: center;
+        padding-top: 20px;
+        width: 100%;
+    }
+    .text6{
+        font-size: 19px;
+    }
+    .form-container{
+        width: 100%;
+    }
+    .img2{
+        width: 100%;
+    }
+    .img3{
+        width: 100%;
+    }
+    .text7{
+        padding-top: 15px;
+        font-size: 19px;
+        text-align: center;
+    }
+    
+ .text8{
+    font-size: 19px;
+    padding-top: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+ }
+#answer{
+    text-align: left;
+}
+#question{
+    font-size: 18px;
+}
  }
