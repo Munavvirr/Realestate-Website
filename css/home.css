@@ -47,8 +47,15 @@
     font-weight: bold;
     color: #ffffff;
 }
-.bgColor1{
-    background-color: #031D49;
+.bgColor1 {
+    background: linear-gradient(45deg, #031D49, #001428);
+}
+.heading,
+.heading1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.box{
+    border-right: 1px solid white;
 }
 .text3{
     color: #ffffffa7;
@@ -243,6 +250,9 @@ button[type="submit"]:hover {
         padding-top: 15px;
         padding-right: 0px;
     }
+    .box{
+        border-right: none;
+    }
     .text3{
         padding-top: 20px;
     }
@@ -298,6 +308,9 @@ button[type="submit"]:hover {
         text-align: center;
         padding-top: 15px;
         padding-right: 0px;
+    }
+    .box{
+        border-right: none;
     }
     .text3{
         padding-top: 21px;
