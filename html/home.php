@@ -1,12 +1,12 @@
 <?php
 // Define your database credentials
-$servername = "your_servername";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database_name";
+$servername = "localhost";
+$username = "root";
+$password = "toot";
+$dbname = "real_estate";
 
 // Create a connection to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, 8111);
 
 // Check the connection
 if ($conn->connect_error) {
@@ -15,23 +15,31 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve data from the form
-    $yourName = $_POST["yourName"];
-    $yourPhoneNumber = $_POST["yourPhoneNumber"];
-    $clientName = $_POST["clientName"];
-    $clientPhoneNumber = $_POST["clientPhoneNumber"];
-    $clientRequirements = $_POST["clientRequirements"];
+    $name = $_POST["name"];
+    $phone_number = $_POST["phone_number"];
+    $client_name = $_POST["client_name"];
+    $client_phone_number = $_POST["client_phone_number"];
+    $client_requirements = $_POST["client_requirements"];
 
     // SQL statement to insert data into the database
-    $sql = "INSERT INTO your_table_name (yourName, yourPhoneNumber, clientName, clientPhoneNumber, clientRequirements)
-            VALUES ('$yourName', '$yourPhoneNumber', '$clientName', '$clientPhoneNumber', '$clientRequirements')";
+    $sql = "INSERT INTO user_details (name, phone_number, client_name, client_phone_number, client_requirements)
+            VALUES (?,?,?,?,?)";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Form data submitted successfully!";
+    // Create a prepared statement
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters with their respective data types
+    $stmt->bind_param("sssss", $name, $phone_number, $client_name, $client_phone_number, $client_requirements);
+
+    if ($stmt->execute()) {
+        // Update the submission status
+        $submissionStatus = "Submitted successfully!";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $submissionStatus = "Error: " . $stmt->error;
     }
 
-    // Close the database connection
+    // Close the prepared statement and the database connection
+    $stmt->close();
     $conn->close();
 }
 ?>
@@ -56,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img class="img6" src="/images/Pawar Real Estate White Logo.png" /></a>
+            <a class="navbar-brand" href="#"><img class="img6" src="../images/Pawar Real Estate White Logo.png" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -67,7 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </nav>
-    <div class="bg-image"></div>
+    <div style='background-image: url("../images/cover_pic.png"); background-repeat: no-repeat;
+        background-size: cover; z-index: -1; position: absolute; top: 0; left: 0; width: 100%; height: 100%;'></div>
     <div class="bgColor">
         <div class="container section">
             <div class="row">
@@ -97,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p class="text12">1. Referral Program</p>
                                 </div>
                                 <div class="col-4">
-                                    <img class="icons" src="/images/network.png" />
+                                    <img class="icons" src="../images/network.png" />
                                 </div>
                             </div>
                             <p class="text11">
@@ -111,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p class="text12">2. Program Details and Registration</p>
                                 </div>
                                 <div class="col-4">
-                                    <img class="icons" src="/images/register.png" />
+                                    <img class="icons" src="../images/register.png" />
                                 </div>
                             </div>
                             <p class="text11">
@@ -128,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p class="text12">3. Referral Submission</p>
                                 </div>
                                 <div class="col-4">
-                                    <img class="icons" src="/images/checklist.png" />
+                                    <img class="icons" src="../images/checklist.png" />
                                 </div>
                             </div>
                             <p class="text11">
@@ -143,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p class="text12">4. Client Evaluation</p>
                                 </div>
                                 <div class="col-4">
-                                    <img class="icons" src="/images/feedback.png" />
+                                    <img class="icons" src="../images/feedback.png" />
                                 </div>
                             </div>
                             <p class="text11">
@@ -161,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p class="text12">5. Sale Confirmation</p>
                                 </div>
                                 <div class="col-4">
-                                    <img class="icons" src="/images/approved.png" />
+                                    <img class="icons" src="../images/approved.png" />
                                 </div>
                             </div>
                             <p class="text11">
@@ -176,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p class="text12">6. Referral Commission Calculation</p>
                                 </div>
                                 <div class="col-4">
-                                    <img class="icons" src="/images/budget.png" />
+                                    <img class="icons" src="../images/budget.png" />
                                 </div>
                             </div>
                             <p class="text11">
@@ -198,7 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </p>
                                 </div>
                                 <div class="col-4">
-                                    <img class="icons" src="/images/bill.png" />
+                                    <img class="icons" src="../images/bill.png" />
                                 </div>
                             </div>
                             <p class="text11">
@@ -210,12 +219,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
                 <div class="pt-5 col-xl-5">
-                    <div><img class="city2" src="/images/images (1) (5).jpeg" /></div>
+                    <div><img class="city2" src="../images/images (1) (5).jpeg" /></div>
                 </div>
             </div>
         </div>
         <div class="container-fluid px-0 pt-5">
-            <img class="city" src="/images/city3.jpeg" />
+            <img class="city" src="../images/city3.jpeg" />
         </div>
         <div class="container pt-5">
             <h1 class="text-center heading pt-5">
@@ -260,7 +269,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="d-flex justify-content-center pt-5">
                 <div class="row">
                     <div class="col-xl-2 col-sm-12 col-md-12 col-lg-2 d-flex justify-content-center">
-                        <img class="img1" src="/images/banknotes-xxl.png" />
+                        <img class="img1" src="../images/banknotes-xxl.png" />
                     </div>
                     <div class="col-xl-10 col-sm-12 col-md-12 col-lg-2">
                         <p class="text5">
@@ -272,7 +281,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="d-flex justify-content-center pt-3">
                 <div class="row">
                     <div class="col-xl-2 col-sm-12 col-md-12 col-lg-2 d-flex justify-content-center">
-                        <img class="img1" src="/images/handshake-xxl.png" />
+                        <img class="img1" src="../images/handshake-xxl.png" />
                     </div>
                     <div class="col-xl-10 col-sm-12 col-md-12 col-lg-2">
                         <p class="text5">
@@ -284,7 +293,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="d-flex justify-content-center pt-3">
                 <div class="row">
                     <div class="col-xl-2 col-sm-12 col-md-12 col-lg-2 d-flex justify-content-center">
-                        <img class="img1" src="/images/apartment-xxl.png" />
+                        <img class="img1" src="../images/apartment-xxl.png" />
                     </div>
                     <div class="col-xl-10 col-sm-12 col-md-12 col-lg-2">
                         <p class="text5">
@@ -302,36 +311,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-xl-6 col-sm-12 col-md-12 col-lg-6">
                     <div class="d-flex justify-content-center pt-5">
                         <div class="form-container">
-                            <form>
+                            <form id="myForm" method="post">
                                 <div class="form-group">
                                     <label for="yourName">Your Name</label>
-                                    <input type="text" id="yourName" name="yourName" required />
+                                    <input type="text" id="name" name="name" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="yourPhoneNumber">Your Phone Number</label>
-                                    <input type="tel" id="yourPhoneNumber" name="yourPhoneNumber" required />
+                                    <input type="tel" id="phone_number" name="phone_number" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="clientName">Client Name</label>
-                                    <input type="text" id="clientName" name="clientName" required />
+                                    <input type="text" id="client_name" name="client_name" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="clientPhoneNumber">Client Phone Number</label>
-                                    <input type="tel" id="clientPhoneNumber" name="clientPhoneNumber" required />
+                                    <input type="tel" id="client_phone_number" name="client_phone_number" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="clientRequirements">Client Requirements</label>
-                                    <textarea id="clientRequirements" name="clientRequirements" rows="4"
+                                    <textarea id="client_requirements" name="client_requirements" rows="4"
                                         required></textarea>
                                 </div>
                                 <button type="submit">Submit</button>
+                                <?php if (!empty($submissionStatus)): ?>
+                                <div class="submission-message"><?php echo $submissionStatus; ?></div>
+                                <?php endif; ?>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-6 col-sm-12 col-md-12 col-lg-6 pt-4">
-                    <img class="img2" src="/images/cities.png" />
-                    <img class="img2" src="/images/city2.jpeg" />
+                    <img class="img2" src="../images/cities.png" />
+                    <img class="img2" src="../images/city2.jpeg" />
                 </div>
             </div>
         </div>
@@ -341,7 +353,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1 class="heading3 text-center">Contact Us</h1>
             <div class="row pt-5">
                 <div class="col-xl-7 col-sm-12 col-md-12 col-lg-7">
-                    <img class="img3" src="/images/engaged-employees.jpg" />
+                    <img class="img3" src="../images/engaged-employees.jpg" />
                 </div>
                 <div class="col-xl-5 col-sm-12 col-md-12 col-lg-5 padTop">
                     <div class="row">
@@ -349,7 +361,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xl-2 col-sm-12 col-md-12 col-lg-2 d-flex justify-content-center">
-                                        <img class="img4" src="/images/mail-xxl.png" />
+                                        <img class="img4" src="../images/mail-xxl.png" />
                                     </div>
                                     <div class="col-xl-10 col-sm-12 col-md-12 col-lg-10">
                                         <p class="text7">pawarrealestategroup@gmail.com</p>
@@ -357,7 +369,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                                 <div class="row pt-5">
                                     <div class="col-xl-2 col-sm-12 col-md-12 col-lg-2 d-flex justify-content-center">
-                                        <img class="img4" src="/images/phone-xxl.png" />
+                                        <img class="img4" src="../images/phone-xxl.png" />
                                     </div>
                                     <div class="col-xl-10 col-sm-12 col-md-12 col-lg-10">
                                         <p class="text7">+91 9096649556</p>
@@ -365,7 +377,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                                 <div class="row pt-5">
                                     <div class="col-xl-2 col-sm-12 col-md-12 col-lg-2 d-flex justify-content-center">
-                                        <img class="img4" src="/images/location-xxl.png" />
+                                        <img class="img4" src="../images/location-xxl.png" />
                                     </div>
                                     <div class="col-xl-10 col-sm-12 col-md-12 col-lg-10">
                                         <p class="text7">Pune, India</p>
@@ -379,18 +391,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="col-12 col-md-4 text-center">
                                     <a
                                         href="https://www.linkedin.com/posts/pawar-realestate-group_homesales-housesales-homeforsale-activity-7083335064146608128-WyfX?utm_source=share&utm_medium=member_android">
-                                        <img class="img5 mx-5 mt-5" src="/images/linkedin-xxl.png" />
+                                        <img class="img5 mx-5 mt-5" src="../images/linkedin-xxl.png" />
                                     </a>
                                 </div>
                                 <div class="col-12 col-md-4 text-center">
                                     <a href="https://www.instagram.com/p/CubTfByvamc/?igshid=MzRlODBiNWFlZA">
-                                        <img class="img5 mx-5 mt-5" src="/images/instagram-xxl.png" />
+                                        <img class="img5 mx-5 mt-5" src="../images/instagram-xxl.png" />
                                     </a>
                                 </div>
                                 <div class="col-12 col-md-4 text-center">
                                     <a
                                         href="https://m.facebook.com/story.php?story_fbid=pfbid02Y6TXSTNfzYK34wmmRMRMAwx5K23trEDjRBnZm1w4Av5DwTGuBbbLcLYG5r2QrSULl&id=100083128039133&mibextid=Nif5oz">
-                                        <img class="img5 mx-5 mt-5" src="/images/facebook-xl.png" />
+                                        <img class="img5 mx-5 mt-5" src="../images/facebook-xl.png" />
                                     </a>
                                 </div>
                             </div>
@@ -510,7 +522,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="container">
                             <div class="row">
                                 <div class="col-xl-2 col-md-2 col-lg-2 d-flex justify-content-center">
-                                    <img class="img10" src="/images/mail-xxl.png" />
+                                    <img class="img10" src="../images/mail-xxl.png" />
                                 </div>
                                 <div class="col-xl-10 col-md-12 col-lg-12 text-center">
                                     <p class="text10">pawarrealestategroup@gmail.com</p>
@@ -518,7 +530,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <div class="row">
                                 <div class="col-xl-2 col-md-2 col-lg-2 d-flex justify-content-center">
-                                    <img class="img10" src="/images/phone-xxl.png" />
+                                    <img class="img10" src="../images/phone-xxl.png" />
                                 </div>
                                 <div class="col-xl-10 col-md-12 col-lg-12 text-center">
                                     <p class="text10">+91 9096649556</p>
@@ -526,7 +538,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <div class="row">
                                 <div class="col-xl-2 col-md-2 col-lg-2 d-flex justify-content-center">
-                                    <img class="img10" src="/images/location-xxl.png" />
+                                    <img class="img10" src="../images/location-xxl.png" />
                                 </div>
                                 <div class="col-xl-10 col-md-12 col-lg-12 text-center">
                                     <p class="text10">Pune, India</p>
@@ -541,18 +553,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-4 col-md-4">
                             <a
                                 href="https://www.linkedin.com/posts/pawar-realestate-group_homesales-housesales-homeforsale-activity-7083335064146608128-WyfX?utm_source=share&utm_medium=member_android">
-                                <img class="social-icon" src="/images/linkedin-xxl.png" alt="LinkedIn" />
+                                <img class="social-icon" src="../images/linkedin-xxl.png" alt="LinkedIn" />
                             </a>
                         </div>
                         <div class="col-4 col-md-4">
                             <a href="https://www.instagram.com/p/CubTfByvamc/?igshid=MzRlODBiNWFlZA">
-                                <img class="social-icon" src="/images/instagram-xxl.png" alt="Instagram" />
+                                <img class="social-icon" src="../images/instagram-xxl.png" alt="Instagram" />
                             </a>
                         </div>
                         <div class="col-4 col-md-4">
                             <a
                                 href="https://m.facebook.com/story.php?story_fbid=pfbid02Y6TXSTNfzYK34wmmRMRMAwx5K23trEDjRBnZm1w4Av5DwTGuBbbLcLYG5r2QrSULl&id=100083128039133&mibextid=Nif5oz">
-                                <img class="social-icon" src="/images/facebook-xl.png" alt="Facebook" />
+                                <img class="social-icon" src="../images/facebook-xl.png" alt="Facebook" />
                             </a>
                         </div>
                     </div>
